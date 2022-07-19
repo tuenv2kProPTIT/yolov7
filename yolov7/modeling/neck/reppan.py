@@ -40,6 +40,8 @@ class RepPANNeck(nn.Module):
             out_channels=channels_list[10],
             n=num_repeats[8],
         )
+        print("init layer")
+        print(channels_list)
 
         self.reduce_layer0 = SimConv(
             in_channels=channels_list[4],
@@ -81,7 +83,8 @@ class RepPANNeck(nn.Module):
     def forward(self, input):
         input = [input[f] for f in self.in_features]
         (x2, x1, x0) = input
-
+        print("Forward neck")
+        print(x0.shape)
         fpn_out0 = self.reduce_layer0(x0)
         upsample_feat0 = self.upsample0(fpn_out0)
         f_concat_layer0 = torch.cat([upsample_feat0, x1], 1)
