@@ -220,11 +220,12 @@ class YOLOV6(nn.Module):
             t0 = time.time()
 
         out_features = self.backbone(x)
-        # for k, v in out_features.items():
-        #     print(k, v.shape)
+        print("forward")
+        for k, v in out_features.items():
+            print(k, v.shape)
         fpn_outs = self.neck(out_features)  # 512, 1024, 2048, s, m, l
-        # for i in fpn_outs:
-        #     print(i.shape)
+        for i in fpn_outs:
+            print(i.shape)
 
         if self.training:
             # print(labels)
